@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Coercive Control Playbook</title>
+<style>
+  :root {
+    --bg: #faf5ec;
+    --bg-soft: #f0e8d6;
+    --bg-deep: #e8dcc4;
+    --text: #2a2218;
+    --text-soft: #5a4f3f;
+    --navy: #1f3a68;
+    --navy-light: #4a6690;
+    --accent: #8b2c2c;
+    --accent-soft: #c8604d;
+    --teal: #2a6470;
+    --gold: #b8860b;
+    --gold-bg: #fff5d6;
+    --good: #3d6e3d;
+    --good-bg: #e8efe1;
+    --critical-bg: #faece9;
+    --border: #d4c8a8;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding-bottom: 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    padding: 32px 20px 22px;
+    border-bottom: 3px solid var(--navy);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  }
+  header h1 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  header .sub {
+    font-size: 14px;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.4;
+  }
+  nav.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    gap: 6px;
+  }
+  nav.sticky::-webkit-scrollbar {
+    height: 6px;
+  }
+  nav.sticky::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  nav.sticky a {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--bg-soft);
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  nav.sticky a:hover {
+    background: var(--navy-light);
+    color: white;
+    border-color: var(--navy-light);
+  }
+  nav.sticky a:active { background: var(--navy); color: white; }
+
+  @media (min-width: 700px) {
+    nav.sticky {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      white-space: normal;
+    }
+  }
+
+  main { padding: 0 20px; }
+
+  section {
+    padding: 32px 0 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .section-num {
+    display: inline-block;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  h2 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 0 0 16px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  h3 {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--accent);
+    margin: 22px 0 8px;
+    line-height: 1.3;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  h4 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 17px;
+    color: var(--text);
+    margin: 18px 0 6px;
+    line-height: 1.3;
+    font-weight: 700;
+    font-style: italic;
+  }
+  p { margin: 0 0 14px; }
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  strong { color: var(--text); font-weight: 700; }
+  em { color: var(--text-soft); }
+
+  blockquote {
+    margin: 14px 0;
+    padding: 12px 18px;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--navy-light);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+  blockquote .citation {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-style: normal;
+    color: var(--text-soft);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .callout {
+    background: var(--gold-bg);
+    border: 1px solid #e8d39a;
+    border-left: 4px solid var(--gold);
+    padding: 16px 18px;
+    border-radius: 4px;
+    margin: 18px 0;
+    font-size: 16px;
+  }
+  .callout .title {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .callout.critical {
+    background: var(--critical-bg);
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .callout.critical .title { color: var(--accent); }
+  .callout.good {
+    background: var(--good-bg);
+    border-color: var(--good);
+    border-left-color: var(--good);
+  }
+  .callout.good .title { color: var(--good); }
+  .callout.teal {
+    background: #e6f0f2;
+    border-color: var(--teal);
+    border-left-color: var(--teal);
+  }
+  .callout.teal .title { color: var(--teal); }
+
+  .definition {
+    background: var(--bg-deep);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    border-left: 4px solid var(--navy);
+  }
+
+  .twocol {
+    margin: 16px 0;
+  }
+  .twocol .col {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .twocol .col h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--navy);
+    font-style: normal;
+  }
+  .twocol .col ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .twocol .col li {
+    margin-bottom: 6px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  @media (min-width: 700px) {
+    .twocol {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .twocol .col { margin-bottom: 0; }
+  }
+
+  .resource {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .resource .name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .resource .desc {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .resource .url {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--teal);
+    word-break: break-all;
+    line-height: 1.4;
+  }
+  .resource .url::before {
+    content: '→ ';
+    color: var(--teal);
+  }
+
+  .ref {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding-left: 14px;
+    text-indent: -14px;
+    color: var(--text-soft);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+  .ref .star {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  footer {
+    padding: 32px 20px 40px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.6;
+    border-top: 2px solid var(--border);
+    background: var(--bg-soft);
+    margin-top: 16px;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--navy);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(31, 58, 104, 0.35);
+    display: none;
+    z-index: 20;
+    font-weight: bold;
+  }
+  .back-to-top.visible { display: block; }
+
+  @media (min-width: 700px) {
+    body { max-width: 720px; margin: 0 auto; padding-left: 20px; padding-right: 20px; background: var(--bg); }
+    header { margin-left: -20px; margin-right: -20px; padding-left: 40px; padding-right: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Coercive Control Playbook</h1>
+  <div class="sub">Why someone can look like a perfectly lovely family in public and be something very different at home — with clinical and academic citations</div>
+</header>
+
+<nav class="sticky">
+  <a href="#why">Why this exists</a>
+  <a href="#what">What it is</a>
+  <a href="#publicprivate">Public/private split</a>
+  <a href="#toolkit">The toolkit</a>
+  <a href="#missed">Why people miss it</a>
+  <a href="#kids">Effect on children</a>
+  <a href="#reconciliation">Don't push reconciliation</a>
+  <a href="#victim">"Doesn't act like a victim"</a>
+  <a href="#believe">OK, I believe — now what?</a>
+  <a href="#resources">Authoritative sources</a>
+  <a href="#refs">References</a>
+</nav>
+
+<main>
+
+<section id="why">
+<div class="section-num">1 of 9</div>
+<h2>Why this document exists</h2>
+
+<p>If you are reading this, someone has handed it to you because you have expressed — or may be about to express — something like the following:</p>
+
+<blockquote>"But they seem so nice." "He's such a devoted father." "Her in-laws are lovely people." "I can't imagine him doing that." "If things were really that bad, surely she would have said something sooner."</blockquote>
+
+<p>These reactions are natural. They are also, unfortunately, predicted by — and exploited by — the very behavior pattern they are defending. The academic and clinical literature on coercive control has documented, across nearly four decades, that abusers who operate through coercive control rather than through frequent physical violence are <strong>specifically selected for, and trained by, their public likability</strong>. Their public face is not a mask they occasionally drop; it is a core and deliberately maintained tool of the abuse itself.</p>
+
+<p>This document briefly summarizes the established research on how coercive control works in public vs. in private, why family and community members consistently fail to see it, and what to do with that knowledge when you are in a position to help — as a teacher, administrator, pastor, therapist, attorney, judge, family member, or friend.</p>
+
+<p><em>Citations are provided at the end for the academic skeptic; bolded claims are direct statements of the established literature.</em></p>
+</section>
+
+<section id="what">
+<div class="section-num">2 of 9</div>
+<h2>Coercive control is not the same as "domestic violence"</h2>
+
+<p>The term most of us grew up with — "domestic violence" — suggests bruises, a black eye, an emergency-room visit. Coercive control is a different and more accurate framework for understanding what most long-term abusive intimate relationships actually look like.</p>
+
+<p>Coined by forensic social worker Evan Stark (2007) and paralleled by sociologist Michael Johnson's concept of "intimate terrorism" (1995, 2008), coercive control is:</p>
+
+<div class="definition">
+A pattern of behavior — often persistent over years — designed to strip the target of autonomy, independence, and sense of self. It operates through isolation, surveillance, regulation of everyday behavior, exploitation, intimidation, and the use of children, relatives, property, or institutions to punish or control. Physical violence, when present, is usually low-level and occasional, and serves to reinforce the non-physical pattern. It may also be absent entirely.
+</div>
+
+<p>Coercive control is recognized by law in many U.S. states (including Colorado, California, Connecticut, Hawaii, and others) and internationally — the United Kingdom, Scotland, and parts of Australia have made it a criminal offense in its own right. The framework is no longer fringe or contested; it is the basis on which protective orders, custody decisions, and criminal prosecutions are increasingly being made.</p>
+
+<p>The essential shift in understanding is this: coercive control is not a severity gradient below physical violence. It is a <strong>different kind of harm entirely</strong>, one that damages the victim's autonomy, relationships, mental health, employment, financial stability, and sense of self in ways that physical injury often does not. Stark's framework conceptualizes coercive control as a "liberty crime" rather than an "assault crime" — a deprivation of freedom analogous to hostage-taking or kidnapping, executed in slow motion inside a relationship.</p>
+</section>
+
+<section id="publicprivate">
+<div class="section-num">3 of 9</div>
+<h2>The public/private split is the signature of coercive control</h2>
+
+<p>The single most counterintuitive — and most important — finding in the coercive-control literature is that <strong>abusers are not "out of control."</strong> They are, in fact, highly controlled: they calibrate their behavior precisely to their audience and to the consequences they might face.</p>
+
+<p>Lundy Bancroft, who ran the first U.S. batterer-intervention program (Emerge, Boston) and spent three decades working directly with over 2,000 abusive men, framed this plainly:</p>
+
+<blockquote>
+"If abusive men were genuinely out of control, they'd behave the same way in all contexts: with their boss, with police officers, with strangers in public. But they don't. An abusive man carefully calibrates his behavior based on his audience and the consequences he might face. He might explode at his partner at home, but remain calm and charming at work."
+<span class="citation">— Bancroft, 2002</span>
+</blockquote>
+
+<p>This is not unique to Bancroft's observation. The public/private split is documented across the literature:</p>
+
+<ul>
+  <li><strong>Stark (2007)</strong> documents that coercive-control abusers are most often "normal" by every external measure — employed, socially integrated, often well-regarded — and that the control operates precisely through the gap between public and private conduct.</li>
+  <li><strong>Johnson (2008)</strong> found that intimate terrorists (his term for coercive-control abusers) are significantly more likely than situationally violent partners to be described as charming, controlling, and image-conscious by people outside the relationship.</li>
+  <li><strong>Bancroft &amp; Silverman (2002)</strong> specifically document that the abusive man's public persona is a <em>deliberate investment</em>: he works harder on his community image than the average non-abusive man, because that image is the cover under which the abuse operates. The more credible he is publicly, the less credible his partner is when she attempts to disclose.</li>
+</ul>
+
+<div class="callout critical">
+  <div class="title">The crucial implication</div>
+  <p style="margin: 0;">When you, as an outside observer, experience an abuser as charming, reasonable, and sympathetic, <strong>this is not evidence that his partner is exaggerating or mistaken</strong>. It is evidence that he is good at the public half of his job. The public impression and the private reality are both real. They are being produced by the same person, deliberately, because the public impression is what keeps the private reality viable.</p>
+</div>
+</section>
+
+<section id="toolkit">
+<div class="section-num">4 of 9</div>
+<h2>The specific public/private toolkit</h2>
+
+<p>Drawing from Stark (2007), Bancroft (2002), Johnson (2008), the Duluth Model "Power and Control Wheel" (Domestic Abuse Intervention Programs, 1984 — used by domestic violence programs, hospitals, and courts nationwide), and the broader clinical literature, here is what coercive-control abusers do in each setting:</p>
+
+<div class="twocol">
+
+<div class="col">
+<h4>In public</h4>
+<p style="font-size: 13px; color: var(--text-soft); margin: 0 0 10px; font-style: italic;">friends, family, church, school, workplace</p>
+<ul>
+  <li><strong>Is gracious, warm, often charismatic.</strong> Remembers names, asks after people's lives, is publicly affectionate with partner and children.</li>
+  <li><strong>Is visibly helpful.</strong> Volunteers, shows up to things, is known as "a good guy" / "a devoted dad" / "a pillar of the community."</li>
+  <li><strong>Speaks warmly of his partner in her presence</strong> — especially when he wants her to hear him doing so, and wants witnesses to remember it.</li>
+  <li><strong>Expresses concern for her well-being</strong> to third parties ("she's been struggling") — preemptively framing any later disclosures as symptoms of her instability.</li>
+  <li><strong>Performs patient exasperation</strong> when she has an emotional reaction in public, communicating "look what I put up with."</li>
+  <li><strong>Cultivates close relationships with her family</strong> — so if she tries to leave, she loses them too, or they side with him.</li>
+  <li><strong>Is a competent parent in observable windows</strong> — fun activities, school events, performs involved fatherhood in front of witnesses.</li>
+</ul>
+</div>
+
+<div class="col">
+<h4>In private</h4>
+<p style="font-size: 13px; color: var(--text-soft); margin: 0 0 10px; font-style: italic;">behind the closed door</p>
+<ul>
+  <li><strong>Regulates daily behavior</strong> — what she wears, eats, buys, reads, watches, who she talks to, when she sleeps, when she gets up, how she drives, whether she works.</li>
+  <li><strong>Monitors and surveils</strong> — phone checks, location tracking, interrogation about where she was.</li>
+  <li><strong>Controls resources</strong> — money, transportation, documents, medical care. Creates dependencies, then weaponizes them.</li>
+  <li><strong>Isolates gradually</strong> — by making interactions with friends or family unpleasant for her afterward, until she stops pursuing them.</li>
+  <li><strong>Uses silent treatment, mood swings, and unpredictability</strong> — keeping her perpetually orienting around avoiding his displeasure.</li>
+  <li><strong>Uses children as instruments</strong> — tells them their mother is unstable, makes their activities contingent on his emotional state.</li>
+  <li><strong>Gaslights</strong> — denies things he said, reframes her accurate perceptions as irrational.</li>
+  <li><strong>Occasionally uses low-level physical coercion</strong> — grabbing, blocking, shoving, cornering. Not frequently enough for bruising. Enough to remind.</li>
+  <li><strong>Apologizes formulaically</strong> — often with identical language year after year, suggesting apologies are a relationship-maintenance tool rather than genuine remorse.</li>
+</ul>
+</div>
+
+</div>
+
+<p>The key analytical insight: <strong>the person in both settings is the same person making the same choices.</strong> The public graciousness is not a mask that occasionally slips to reveal a hidden monster. Both the graciousness and the control are being performed simultaneously, by someone who is tracking his audience continuously. The control is possible <em>because</em> the public graciousness is credible.</p>
+</section>
+
+<section id="missed">
+<div class="section-num">5 of 9</div>
+<h2>Why family and community consistently fail to see it</h2>
+
+<p>Good people — teachers, pastors, relatives, friends — regularly miss coercive control, even when they are deeply invested in the victim's welfare. This is not a moral failing on their part. The literature identifies several structural reasons:</p>
+
+<h4>a) The abuser writes the narrative first</h4>
+<p>Bancroft documents that abusers routinely front-load the "she has mental health issues" / "she's been under stress" / "her family is difficult" framing <strong>months or years before the victim discloses anything</strong>. When she eventually attempts to tell her story, observers already have a competing, prepared narrative in place — told to them by the more composed, more articulate party.</p>
+
+<h4>b) Confirmation bias about "what abuse looks like"</h4>
+<p>Most people carry an image of domestic violence drawn from dramatic portrayals: visible bruising, screaming arguments, a clearly "bad" man. Coercive-control abusers do not match this image. Their violence, when present, is controlled and rarely visible. Their demeanor is not overtly hostile. The absence of the dramatic signals is misread as the absence of harm. Stark (2007) specifically identifies this as one of the "traps" that has allowed coercive control to remain legally and socially invisible for decades.</p>
+
+<h4>c) Victim presentation is often worse than abuser presentation</h4>
+<p>This is the cruelest feature of the pattern. A woman who has spent years being systematically undermined, sleep-deprived, surveilled, isolated, and gaslit <strong>does not present as calm and credible</strong>. She presents as anxious, emotional, sometimes inconsistent in her account, sometimes angry, sometimes paranoid-seeming. This is the predicted effect of the abuse — but to an outside observer who does not understand the pattern, it looks like evidence that the problem is her. Meanwhile her husband sits calmly next to her looking patient and concerned. Herman (1992) and Stark (2007) both document this inversion extensively. Courts are particularly prone to it.</p>
+
+<h4>d) The cost of believing her is higher than the cost of not</h4>
+<p>If you are a school, a church, a family member, or an employer, believing the victim requires you to do something. You may have to change how you think of someone you've known for years. You may have to choose a side in a visible community split. Not believing her requires nothing: the status quo continues, everyone remains comfortable, and you get to keep thinking of yourself as reasonable and balanced. This asymmetry is well documented in the literature on institutional responses to disclosure (Herman, 2015; DARVO literature — see Freyd, 1997 and subsequent work).</p>
+
+<h4>e) The abuser's family and associates are often co-signers</h4>
+<p>In-laws, siblings, and close friends of the abuser are frequently enlisted — knowingly or unknowingly — into pressuring the victim to stay, discrediting her disclosures, or attacking her character after she leaves. Stark (2007) describes this as part of the "tangle" of coercive control: the abuser does not operate alone, and the victim's attempts to seek help are often met with a network response rather than an individual one.</p>
+
+<div class="callout critical">
+  <div class="title">What this means for you, the person reading this document</div>
+  <p style="margin: 0;">If you have caught yourself thinking "but he seems so nice," or "but her in-laws are lovely," or "but she seems so unstable," or "if it were really that bad she would have said something sooner" — <strong>each of these is a predicted reaction, documented in the literature, and each of them is what the pattern relies on in order to function</strong>. Having these reactions does not make you a bad person. Acting on them without reconsidering, now that you have been informed, does.</p>
+</div>
+</section>
+
+<section id="kids">
+<div class="section-num">6 of 9</div>
+<h2>What coercive control does to children</h2>
+
+<p>Children in households with coercive control are not merely witnesses; they are participants in the system, often unwittingly, and they are harmed by it whether or not they are directly targeted with violence.</p>
+
+<p>Callaghan et al. (2018), in a landmark qualitative study of 21 children aged 8–18 who had lived in coercive-control households, documented that the children experienced the control directly — not merely as spectators of a parent being controlled. The children described surveillance of their own movements, regulation of their emotional expression, isolation from extended family and friends, and being used as instruments against the non-abusing parent. Katz (2016, 2022) extends this finding, showing that coercive control reshapes the parent-child relationship itself, often deliberately.</p>
+
+<h3>Specific harms documented in the literature</h3>
+
+<ul>
+  <li><strong>Alignment pressure.</strong> The abuser actively recruits children as allies against the non-abusing parent, often by disclosing adult grievances to them, asking them to choose sides, or casting the other parent as unstable, unsafe, or unloving (Bancroft &amp; Silverman, 2002).</li>
+  <li><strong>Contingent access to activities and relationships.</strong> Children learn that what they can do, where they can go, and who they can see depends on the abusive parent's emotional state — producing chronic hypervigilance.</li>
+  <li><strong>Parentification and emotional caretaking.</strong> Children in coercive-control households are often expected to manage the abuser's moods, comfort him, or intervene during conflicts — inverting the normal parent-child dynamic.</li>
+  <li><strong>Modeling.</strong> Children absorb the coercive-control dynamic as a template for intimate relationships. Boys raised in these households are statistically more likely to become abusers; girls are statistically more likely to be victimized again in adulthood (Bancroft, Silverman &amp; Ritchie, 2012).</li>
+</ul>
+
+<div class="callout">
+  <div class="title">Critical: the abuser is often a competent parent in observable moments</div>
+  <p style="margin: 0;">He takes the children to fun outings. He attends school events. He may be affectionate and engaged. This does <em>not</em> negate the harm. Bancroft &amp; Silverman (2002), whose work <em>The Batterer as Parent</em> is the seminal text on this question, document that abusers can be simultaneously (a) a loving parent in observable contexts and (b) a harmful parent in the broader pattern. The observable good parenting is often part of the strategy — both to maintain the public image and to ensure continued access to the children as leverage. <strong>A CFI, PRE, or family court that focuses only on the observable moments will miss the pattern entirely.</strong></p>
+</div>
+</section>
+
+<section id="reconciliation">
+<div class="section-num">7 of 9</div>
+<h2>A note on pushing for reconciliation</h2>
+
+<p>In many communities — particularly religious communities, but also extended families, friend groups, and well-meaning workplace cultures — the default response to a marriage in crisis is to push for reconciliation. Couples counseling. Pastoral mediation. "Have you tried just talking to him?" "Marriage is hard, but it's worth fighting for." "The children need both their parents." "What about forgiveness?"</p>
+
+<p>If this is a normal marriage going through a hard time, those impulses are loving and often correct. <strong>If this is a coercive-control situation, those impulses are actively dangerous to the victim and her children.</strong> The clinical literature is unambiguous on this point.</p>
+
+<h3>Why reconciliation pushes harm coercive-control victims</h3>
+
+<ul>
+  <li><strong>Couples counseling assumes two parties of roughly equal power who are both willing to be honest.</strong> In a coercive-control relationship, the victim cannot speak freely — she will be punished privately for anything she says in session. The abuser uses the framework to learn her grievances and refine his control. Most reputable couples therapists now screen for coercive control and decline to do couples work when it's present, precisely because the harm is well documented (Bancroft, 2002; Stark, 2007).</li>
+  <li><strong>Mediation and "let's just talk it out" assume good faith on both sides.</strong> A coercive-control abuser is not operating in good faith. He is operating tactically. Mediation gives him another venue in which to perform reasonableness while she is gaslit, exhausted, and outnumbered.</li>
+  <li><strong>"Forgiveness" framings without behavioral change put the victim back in danger.</strong> The most dangerous period in an abusive relationship is the weeks and months immediately after she tries to leave (Campbell et al., 2003). A reconciliation push in that window can be lethal. Forgiveness, properly understood, does not require continued exposure to the harm.</li>
+  <li><strong>"The children need both parents" assumes both parents are safe.</strong> Children raised in coercive-control households are directly harmed by the dynamic, including by an abusive parent's "competent" parenting moments — because those moments coexist with weaponization, alignment pressure, and modeling. "Two parents" is not a goal in itself when one of those parents is doing harm.</li>
+  <li><strong>Religious communities specifically</strong> have, in recent decades, increasingly recognized that a theological emphasis on marital permanence, wifely submission, or "covenant" can be deployed by abusers as a tool of control. Many evangelical, Catholic, mainline Protestant, and other denominational bodies have issued statements explicitly distinguishing genuine reconciliation (which requires sustained behavioral change by the offender) from premature reconciliation pressure (which protects the offender and re-endangers the victim).</li>
+</ul>
+
+<div class="callout critical">
+  <div class="title">If you are in a community that defaults to reconciliation pushes</div>
+  <p style="margin: 0;">Please consider that what you are being asked to do — by listening to this victim and not pushing her back toward the marriage — is not abandonment of marriage as an institution. It is recognition that <strong>the conditions for genuine reconciliation are not present</strong>. Genuine reconciliation requires the offender to demonstrate sustained behavioral change over time, voluntarily, without coercion, with the safety of the victim and children fully prioritized. That is rare in coercive-control cases. The literature on perpetrator change is sobering: long-term studies (Gondolf and others) suggest only around 8% of coercive-control abusers show sustained change, and those who do typically do so only after losing the relationship and facing serious external consequences — not as a result of being talked back into the marriage.</p>
+</div>
+
+<p>For an extended treatment of this question specifically for faith communities and clergy, see your separate companion document on the theology of leaving an abusive marriage.</p>
+</section>
+
+<section id="victim">
+<div class="section-num">8 of 9</div>
+<h2>When the victim "doesn't act like a victim"</h2>
+
+<p>Observers frequently cite any of the following as evidence that a woman's disclosures should not be believed:</p>
+
+<ul>
+  <li>She stayed for years</li>
+  <li>She didn't tell anyone at the time</li>
+  <li>She has mental health conditions, is neurodivergent, or "is intense"</li>
+  <li>Her story gets worse over time rather than better</li>
+  <li>She seems angry, disorganized, or emotional when disclosing</li>
+  <li>She has, at times, defended him or spoken warmly of him</li>
+  <li>She still loves him</li>
+</ul>
+
+<p><strong>Every single one of these is a predicted, documented feature of coercive-control victimization — not a reason to doubt the account.</strong> The clinical literature is unambiguous:</p>
+
+<ul>
+  <li><strong>Staying for years</strong> reflects the statistically well-documented dynamics of trauma bonds (Dutton &amp; Painter, 1993), financial and child-related entrapment (Stark, 2007), gradual normalization of abnormal behavior, and the genuinely high risks associated with leaving — the most dangerous period in an abusive relationship is the weeks and months immediately after separation (Campbell et al., 2003).</li>
+  <li><strong>Late disclosure and escalating disclosure</strong> are the normal pattern. Victims typically test the waters with "smaller" incidents first to see how people respond; successful disclosures make larger ones possible. Autistic victims, in particular, often use rigid internal rubrics about "what counts" as abuse and may withhold incidents they themselves didn't categorize as abuse until later reframing (Sedgewick et al., 2019; Pearson et al., 2022).</li>
+  <li><strong>Neurodivergence, mental health conditions, and emotional intensity are NOT credibility problems.</strong> They are, statistically, risk factors — abusers preferentially target women whose neurodivergence, trauma history, or mental health makes their disclosures easier to dismiss (Douglas &amp; Hines, 2011). If you catch yourself finding someone less credible because she is autistic or anxious or has depression, please note: the abuser chose her <em>for</em> those features, precisely because he could count on you to do that.</li>
+  <li><strong>Anger, inconsistency, and emotional disorganization</strong> at the point of disclosure are exactly what the abuse produces. The non-abusing parent's nervous system has spent years being systematically dysregulated. Asking her to present as calm, linear, and measured is asking her to look like she hasn't been abused — which is asking her to provide the evidence that would disprove her own case (Herman, 1992, 2015).</li>
+  <li><strong>Continued love, defense of the abuser, and ambivalence</strong> are also predicted — trauma bonds are real, children and shared history are real, and the victim's feelings are not required to be clean in order for her disclosures to be true (Stark, 2007).</li>
+</ul>
+
+<div class="callout teal">
+  <div class="title">A reframe that may help</div>
+  <p style="margin: 0;">If you were asked to predict what a real coercive-control victim looks like, based on the literature, you would predict: someone who stayed a long time, disclosed late, discloses more over time, presents as emotionally inconsistent or anxious, has mental health or neurodivergence considerations, still has complicated feelings about her partner, and has family members who are surprised. <strong>If your threshold for belief excludes everyone who fits the predicted profile, your threshold excludes actual victims by design.</strong></p>
+</div>
+</section>
+
+<section id="believe">
+<div class="section-num">9 of 9</div>
+<h2>OK, I believe — now what?</h2>
+
+<p>If you are in a position where a family is in crisis and you are being asked to believe (or not believe) a disclosure of abuse:</p>
+
+<ul>
+  <li><strong>Suspend confidence in your public impression of the accused.</strong> It is not that you were lied to; it is that the public impression was deliberately constructed, over years, by someone investing heavily in it. Your positive feelings are data about his skill, not about his character.</li>
+  <li><strong>Do not ask the victim to prove it with the kind of evidence the abuse was designed to prevent.</strong> There is rarely a dramatic incident with witnesses. The absence of such incidents is evidence of the pattern, not evidence against it.</li>
+  <li><strong>Listen without requiring linearity.</strong> A disclosure that jumps around in time, includes small-seeming incidents next to larger ones, and is emotionally uneven is the <em>normal</em> shape of a truthful disclosure of a years-long pattern. A perfectly organized, emotionally neutral disclosure is rarer and, if anything, more suspicious.</li>
+  <li><strong>Believe her first, verify later.</strong> The cost of believing a true victim and continuing to act with care is low. The cost of disbelieving a true victim and withdrawing support is high and sometimes lethal. The baseline rate of false allegations in adult IPV disclosure is low (under 10% across studies), and substantially lower than the base rate of disbelieved true disclosures.</li>
+  <li><strong>Take the coercive-control analysis seriously for custody, parenting time, school access, and support decisions.</strong> The observable good parenting of an abuser does not negate the pattern. Many U.S. states (including Colorado) and several countries now have laws explicitly recognizing this. Observers making decisions about children should, too.</li>
+  <li><strong>Notice who is trying to recruit you.</strong> If the abuser, his family, or his associates are contacting you after the separation — to "share concerns," "give you the other side," or "make sure you know what's really going on" — the recruitment of your community is part of the pattern, not a separate matter. You are being used. Declining to participate is a form of refusing to enforce the abuse.</li>
+</ul>
+</section>
+
+<section id="resources">
+<h2>Further authoritative resources</h2>
+
+<p>The analysis in this document aligns with the published positions of major governmental, nonprofit, and clinical institutions working on domestic violence. The following are public-facing resources for independent corroboration. All are freely accessible online.</p>
+
+<h3>U.S. federal agencies</h3>
+
+<div class="resource">
+  <div class="name">U.S. Department of Justice, Office on Violence Against Women (OVW)</div>
+  <div class="desc">The OVW defines domestic violence to explicitly include "patterns of coercive behavior" and "psychological, emotional, economic, or technological actions or threats of actions that influence another person." This is the operative federal definition for funding, training, and prosecutorial frameworks.</div>
+  <div class="url">justice.gov/ovw/domestic-violence</div>
+</div>
+
+<div class="resource">
+  <div class="name">National Domestic Violence Hotline — "Power and Control" page</div>
+  <div class="desc">The Hotline's public education page explicitly identifies coercive control as a core form of domestic violence and features the "Power and Control Wheel" (Duluth Model) as the primary explanatory tool. Hotline: 1-800-799-7233, or text START to 88788.</div>
+  <div class="url">thehotline.org/identify-abuse/power-and-control/</div>
+</div>
+
+<div class="resource">
+  <div class="name">National Domestic Violence Hotline — "Understand Relationship Abuse"</div>
+  <div class="desc">A plain-language explainer on how abuse operates as a pattern, including the public/private split discussed in this document.</div>
+  <div class="url">thehotline.org/identify-abuse/understand-relationship-abuse/</div>
+</div>
+
+<div class="resource">
+  <div class="name">National Network to End Domestic Violence (NNEDV)</div>
+  <div class="desc">NNEDV defines domestic violence as "a pattern of coercive, controlling behavior that can include physical abuse, emotional or psychological abuse, sexual abuse or financial abuse," and explicitly notes that "some abusers are able to exert complete control over a victim's every action without ever using violence."</div>
+  <div class="url">nnedv.org/content/frequently-asked-questions-about-domestic-violence/</div>
+</div>
+
+<h3>State judicial and legal institutions</h3>
+
+<div class="resource">
+  <div class="name">Washington State Courts — Domestic Violence Manual, Chapter 2</div>
+  <div class="desc">Official judicial training manual framing domestic violence as "a pattern of behavior, not an isolated, individual act," specifically identifying coercive control tactics as part of the DV framework for judicial decision-making.</div>
+  <div class="url">courts.wa.gov/content/manuals/domviol/chapter2.pdf</div>
+</div>
+
+<div class="resource">
+  <div class="name">Florida State Courts Administrator — "The Coercive Control Context" (Stark, 2021)</div>
+  <div class="desc">Official judicial education materials on applying coercive control concepts to family court decision-making.</div>
+  <div class="url">flcourts.gov — search: "Evan Stark Coercive Control"</div>
+</div>
+
+<div class="resource">
+  <div class="name">New York State Defenders Association — "Coercive Control is Domestic Violence" (2023)</div>
+  <div class="desc">A 50+ page guide for attorneys working under the New York Domestic Violence Survivors Justice Act (DVSJA).</div>
+  <div class="url">nysda.org — search: "Coercive Control Guide"</div>
+</div>
+
+<div class="resource">
+  <div class="name">Battered Women's Justice Project — Coercive Control Statutory Matrix (2024)</div>
+  <div class="desc">State-by-state chart of U.S. jurisdictions that have incorporated coercive control into their domestic violence, protection order, or family law statutes — including Colorado, California, Connecticut, Hawaii, Oklahoma, Washington, and others.</div>
+  <div class="url">bwjp.org — search: "Coercive Control Statutory Matrix"</div>
+</div>
+
+<h3>International / academic institutional</h3>
+
+<div class="resource">
+  <div class="name">UK Home Office — Controlling or Coercive Behaviour Statutory Guidance (April 2023)</div>
+  <div class="desc">The UK government's official guidance for police, prosecutors, and judges on the criminal coercive-control offense. One of the most operationally detailed public documents in existence on how to recognize and document coercive control.</div>
+  <div class="url">gov.uk — search: "Controlling or coercive behaviour statutory guidance framework"</div>
+</div>
+
+<div class="resource">
+  <div class="name">Scottish Government — Domestic Abuse (Scotland) Act 2018</div>
+  <div class="desc">Scotland's criminal coercive-control statute is widely regarded as the strongest in the world.</div>
+  <div class="url">legislation.gov.uk/asp/2018/5/contents</div>
+</div>
+
+<div class="resource">
+  <div class="name">Sagesse — Coercive Control Brief to Canadian Parliament (2021)</div>
+  <div class="desc">A public-health briefing to the House of Commons Standing Committee on Justice. Notes that over 95% of domestic violence victims report experiencing coercive control.</div>
+  <div class="url">ourcommons.ca — search: "Sagesse Domestic Violence Prevention Society"</div>
+</div>
+
+<h3>Survivor and advocacy resources</h3>
+
+<div class="resource">
+  <div class="name">DomesticShelters.org — "A Guide to Coercive Control"</div>
+  <div class="desc">Accessible survivor-facing overview featuring Evan Stark and Lisa Aronson Fontes. Includes the critical finding that <em>100% of intimate partner homicides reviewed in a New South Wales study involved prior coercive control</em> — not physical violence escalation alone.</div>
+  <div class="url">domesticshelters.org/articles/identifying-abuse/a-guide-to-coercive-control</div>
+</div>
+
+<div class="resource">
+  <div class="name">Lisa Aronson Fontes, PhD — <em>Invisible Chains</em> (Guilford Press, 2015)</div>
+  <div class="desc">Survivor-focused book from a University of Massachusetts researcher.</div>
+  <div class="url">guilford.com — search: "Invisible Chains Fontes"</div>
+</div>
+
+<div class="resource">
+  <div class="name">One Love Foundation</div>
+  <div class="desc">Founded after the 2010 murder of Yeardley Love by her former boyfriend — a coercive-control case. Provides educational materials distinguishing healthy from unhealthy relationship behaviors.</div>
+  <div class="url">joinonelove.org/learn/</div>
+</div>
+
+<div class="resource">
+  <div class="name">Domestic Abuse Intervention Programs (Duluth, MN) — "The Duluth Model"</div>
+  <div class="desc">The original 1984 framework, still in wide use worldwide by domestic violence programs, hospitals, and courts.</div>
+  <div class="url">theduluthmodel.org/wheels/</div>
+</div>
+
+<h3>Key convergence across these sources</h3>
+
+<p>Every one of the institutional resources listed above — spanning U.S. federal law, multiple state court systems, international criminal jurisdictions, academic researchers, and survivor advocacy organizations — converges on the following:</p>
+
+<ul>
+  <li>Coercive control is a pattern, not an incident — the pattern is the harm, and isolated incidents do not capture it.</li>
+  <li>Physical violence is <strong>neither necessary nor sufficient</strong> for intimate partner abuse. Coercive control can be severe even without physical violence.</li>
+  <li>Abusers deliberately present differently in public than in private. Public likability is a tool of the abuse, not evidence against it.</li>
+  <li>Coercive control is a leading predictor of intimate partner homicide — in some studies, more predictive than a prior history of physical violence.</li>
+  <li>Children in coercive-control households are directly harmed, not merely exposed to adult conflict. This harm continues and often intensifies post-separation.</li>
+</ul>
+
+<div class="callout critical">
+  <div class="title">In plain terms</div>
+  <p style="margin: 0;">If you are reading this document and are tempted to treat its claims as one perspective among many, please consider: the claims made here are also the published positions of the U.S. Department of Justice, the National Domestic Violence Hotline, the UK and Scottish governments, multiple U.S. state legislatures and court systems, and the entire body of peer-reviewed research on the subject. The framework is not fringe. The institutional consensus is settled. What remains contested is only how to apply it to individual cases — and that work happens case by case, with care, starting from the framework rather than from incredulity.</p>
+</div>
+</section>
+
+<section id="refs">
+<h2>References</h2>
+
+<p>The following works are the primary academic and clinical sources underlying this document. Works are arranged alphabetically; those marked with an asterisk (<span class="ref"><span class="star">*</span></span>) are the foundational texts most widely cited in the field.</p>
+
+<div class="ref">Bancroft, L. (2002). <em>Why Does He Do That? Inside the Minds of Angry and Controlling Men.</em> Berkley Books. <span class="star">*</span></div>
+<div class="ref">Bancroft, L., &amp; Silverman, J. G. (2002). <em>The Batterer as Parent: Addressing the Impact of Domestic Violence on Family Dynamics.</em> Sage Publications. <span class="star">*</span></div>
+<div class="ref">Bancroft, L., Silverman, J. G., &amp; Ritchie, D. (2012). <em>The Batterer as Parent</em> (2nd ed.). Sage Publications.</div>
+<div class="ref">Callaghan, J. E. M., Alexander, J. H., Sixsmith, J., &amp; Fellin, L. C. (2018). Beyond "witnessing": Children's experiences of coercive control in domestic violence and abuse. <em>Journal of Interpersonal Violence, 33</em>(10), 1551–1581. <span class="star">*</span></div>
+<div class="ref">Campbell, J. C., Webster, D., Koziol-McLain, J., et al. (2003). Risk factors for femicide in abusive relationships. <em>American Journal of Public Health, 93</em>(7), 1089–1097.</div>
+<div class="ref">Domestic Abuse Intervention Programs. (1984). <em>The Power and Control Wheel.</em> Duluth, MN. (The "Duluth Model" framework.)</div>
+<div class="ref">Douglas, E. M., &amp; Hines, D. A. (2011). The helpseeking experiences of men who sustain intimate partner violence. <em>Journal of Family Violence, 26</em>(6), 473–485.</div>
+<div class="ref">Dutton, D. G., &amp; Painter, S. (1993). Emotional attachments in abusive relationships: A test of traumatic bonding theory. <em>Violence and Victims, 8</em>(2), 105–120.</div>
+<div class="ref">Fontes, L. A. (2015). <em>Invisible Chains: Overcoming Coercive Control in Your Intimate Relationship.</em> Guilford Press.</div>
+<div class="ref">Freyd, J. J. (1997). Violations of power, adaptive blindness and betrayal trauma theory. <em>Feminism &amp; Psychology, 7</em>(1), 22–32. (Originator of the DARVO framework.)</div>
+<div class="ref">Herman, J. L. (1992). <em>Trauma and Recovery: The Aftermath of Violence — From Domestic Abuse to Political Terror.</em> Basic Books. <span class="star">*</span></div>
+<div class="ref">Herman, J. L. (2015). <em>Trauma and Recovery</em> (2015 edition, with new epilogue). Basic Books.</div>
+<div class="ref">Johnson, M. P. (1995). Patriarchal terrorism and common couple violence: Two forms of violence against women. <em>Journal of Marriage and Family, 57</em>(2), 283–294.</div>
+<div class="ref">Johnson, M. P. (2008). <em>A Typology of Domestic Violence: Intimate Terrorism, Violent Resistance, and Situational Couple Violence.</em> Northeastern University Press. <span class="star">*</span></div>
+<div class="ref">Katz, E. (2016). Beyond the physical incident model: How children living with domestic violence are harmed by and resist regimes of coercive control. <em>Child Abuse Review, 25</em>(1), 46–59.</div>
+<div class="ref">Katz, E. (2022). <em>Coercive Control in Children's and Mothers' Lives.</em> Oxford University Press.</div>
+<div class="ref">Meier, J. S. (2015). Johnson's differentiation theory: Is it really empirically supported? <em>Journal of Child Custody, 12</em>(1), 4–24.</div>
+<div class="ref">Pearson, A., Rees, J., &amp; Forster, S. (2022). "This was just how this friendship worked": Experiences of interpersonal victimization among autistic adults. <em>Autism in Adulthood, 4</em>(2), 141–150.</div>
+<div class="ref">Sedgewick, F., Hill, V., &amp; Pellicano, E. (2019). "It's different for girls": Gender differences in the friendships and conflict of autistic and neurotypical adolescents. <em>Autism, 23</em>(5), 1119–1132.</div>
+<div class="ref">Stark, E. (2007). <em>Coercive Control: How Men Entrap Women in Personal Life.</em> Oxford University Press. <span class="star">*</span></div>
+<div class="ref">Stark, E., &amp; Hester, M. (2019). Coercive control: Update and review. <em>Violence Against Women, 25</em>(1), 81–104.</div>
+
+<h3>Legal recognition</h3>
+<p style="font-size: 14px; line-height: 1.5;">Coercive control is recognized in law in many U.S. states (Colorado, California, Connecticut, Hawaii, and others) — typically in family-law statutes governing custody and protective orders. Internationally, it is a criminal offense in England and Wales (since 2015), Scotland (2018), Ireland (2018), and several Australian states. The U.S. Violence Against Women Act Reauthorization (2022) incorporates coercive control in federal definitions. Specific statute citations are available in the cited works above for readers who want them.</p>
+
+<h3>Note on sources</h3>
+
+<p style="font-size: 14px; line-height: 1.5;">Lundy Bancroft's analytical work on the patterns of abusive men remains among the most widely cited in the field and is drawn on here for his framework and his observational findings from three decades of batterer intervention work. In 2025, public allegations emerged regarding Bancroft's personal conduct toward some survivors who participated in his workshops. These allegations, if true, do not retroactively invalidate the analytical framework or the observational data, which have been independently supported by other researchers (Stark, Johnson, Katz, Callaghan, and others cited above). Readers who prefer to rely on sources whose authors' personal conduct has not been publicly contested may substitute Stark (2007), Herman (1992, 2015), or Katz (2022) as primary citations without losing any of the substance of this document's claims.</p>
+
+<h3>Note on gendered language</h3>
+
+<p style="font-size: 14px; line-height: 1.5;">This document uses male-abuser/female-victim framing throughout, because this is the dominant pattern in the empirical literature on coercive control (over 85% of intimate-terrorism cases in population studies) and because the clinical frameworks most deeply developed are specifically calibrated to this pattern. Coercive control exists in same-sex relationships and can be perpetrated by women against men (see Stark &amp; Hester, 2019 for review). The analytical framework — public/private split, isolation, regulation, use of children — applies across all configurations.</p>
+</section>
+
+</main>
+
+<footer>
+This document was prepared as a general reference for people who may be asked to understand the dynamics of coercive control in the course of supporting a specific family or individual. It summarizes the established academic and clinical literature and is not itself a primary source; readers are encouraged to consult the cited works directly for any professional, legal, or clinical use. This is not legal advice. Document compiled April 2026.
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
