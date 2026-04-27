@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Someone Tells You Their Marriage Is Bad</title>
+<style>
+  :root {
+    --bg: #faf5ec;
+    --bg-soft: #f0e8d6;
+    --bg-deep: #e8dcc4;
+    --text: #2a2218;
+    --text-soft: #5a4f3f;
+    --navy: #1f3a68;
+    --navy-light: #4a6690;
+    --teal: #2a6470;
+    --warm-accent: #a85a3e;
+    --gold: #b8860b;
+    --gold-bg: #fff5d6;
+    --good: #3d6e3d;
+    --good-bg: #e8efe1;
+    --critical-bg: #faece9;
+    --critical: #8b2c2c;
+    --border: #d4c8a8;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding-bottom: 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    padding: 32px 20px 22px;
+    border-bottom: 3px solid var(--navy);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  }
+  header h1 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  header .sub {
+    font-size: 14.5px;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  nav.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    gap: 6px;
+  }
+  nav.sticky::-webkit-scrollbar { height: 6px; }
+  nav.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  nav.sticky a {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--bg-soft);
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  nav.sticky a:hover { background: var(--navy); color: white; border-color: var(--navy); }
+  nav.sticky a:active { background: var(--navy-light); color: white; }
+  @media (min-width: 700px) {
+    nav.sticky { flex-wrap: wrap; overflow-x: visible; white-space: normal; }
+  }
+
+  main { padding: 0 20px; }
+  section {
+    padding: 32px 0 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 0 0 14px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  h3 {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--warm-accent);
+    margin: 22px 0 8px;
+    line-height: 1.3;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  h4 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin: 18px 0 6px;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  p { margin: 0 0 14px; }
+  ul, ol { padding-left: 22px; margin: 0 0 14px; }
+  li { margin-bottom: 8px; }
+  strong { color: var(--text); font-weight: 700; }
+  em { color: var(--text-soft); }
+
+  blockquote {
+    margin: 14px 0;
+    padding: 12px 18px;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--navy-light);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+
+  .callout {
+    background: var(--gold-bg);
+    border: 1px solid #e8d39a;
+    border-left: 4px solid var(--gold);
+    padding: 16px 18px;
+    border-radius: 4px;
+    margin: 18px 0;
+    font-size: 16px;
+  }
+  .callout .title {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .callout.critical { background: var(--critical-bg); border-color: var(--critical); border-left-color: var(--critical); }
+  .callout.critical .title { color: var(--critical); }
+  .callout.good { background: var(--good-bg); border-color: var(--good); border-left-color: var(--good); }
+  .callout.good .title { color: var(--good); }
+
+  .card-link {
+    display: block;
+    background: white;
+    border: 2px solid var(--navy);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+  .card-link:hover { background: var(--bg-soft); }
+  .card-link .label {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm-accent);
+    margin-bottom: 4px;
+  }
+  .card-link .title {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .card-link .desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.4;
+  }
+
+  footer {
+    padding: 32px 20px 40px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.55;
+    border-top: 2px solid var(--border);
+    background: var(--bg-soft);
+    margin-top: 16px;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--navy);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(31, 58, 104, 0.35);
+    display: none;
+    z-index: 20;
+    font-weight: bold;
+  }
+  .back-to-top.visible { display: block; }
+
+  @media (min-width: 700px) {
+    body { max-width: 720px; margin: 0 auto; padding-left: 20px; padding-right: 20px; background: var(--bg); }
+    header { margin-left: -20px; margin-right: -20px; padding-left: 40px; padding-right: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>When Someone Tells You Their Marriage Is Bad</h1>
+  <div class="sub">A guide for small group leaders, prayer partners, and friends in a church environment — recognizing psychological abuse and coercive control, responding without making it worse, and knowing when to get out of the way</div>
+</header>
+
+<nav class="sticky">
+  <a href="#who">Who this is for</a>
+  <a href="#core">Core message</a>
+  <a href="#what-it-is">What abuse is</a>
+  <a href="#warning">Warning signs</a>
+  <a href="#mistakes">7 things not to do</a>
+  <a href="#disclosure">When someone tells you</a>
+  <a href="#urgent">When to get help fast</a>
+  <a href="#resources">Resources</a>
+  <a href="#specific">Specific situations</a>
+  <a href="#summary">Summary</a>
+  <a href="#cards">Reference cards</a>
+</nav>
+
+<main>
+
+<section id="who">
+<h2>Who this is for</h2>
+
+<p>This guide is for people in participatory churches who regularly find themselves in conversations where somebody tells them their marriage is hard. Small group leaders. Prayer partners. The person who always gets pulled aside after service. Ministry team members. Home church hosts. Anyone whose church has a flat enough structure that pastoral care happens in living rooms and coffee shops, not just in pastors' offices.</p>
+
+<p>Most of what people bring to you is ordinary marriage conflict — things better communication and some grace can work through. But a meaningful minority is not ordinary marriage conflict. It is psychological abuse and coercive control, and responding to it the way you would respond to ordinary conflict makes it worse. This guide is about how to tell the difference, what to do, and what not to do. It is short on purpose.</p>
+</section>
+
+<section id="core">
+<h2>The core message</h2>
+
+<div class="callout critical">
+  <div class="title">If you get one thing from this document</div>
+  <p style="margin: 0;">Couples counseling with an active abuser makes the victim less safe, not more. Don't do it. Don't pray with them together about the marriage. Don't mediate. Don't facilitate reconciliation conversations. Meet with each of them separately, or meet only with the one who reached out. <strong>This is the single most important thing lay helpers get wrong, and it costs victims years.</strong></p>
+</div>
+
+<h3>Why lay helpers need this specifically</h3>
+
+<p>Pastoral-care training, when it exists, mostly sits with ordained staff. But in churches with participatory models, the people actually receiving disclosures of marriage trouble are often volunteers: the small group leader, the worship team friend, the older couple in the home church. The pattern is well-documented. Research on domestic violence in church contexts consistently finds that victims disclose to trusted lay people more often than to pastors — and that those lay people, with the best intentions, often respond in ways that extend the abuse rather than interrupt it.</p>
+
+<p>The specific failure modes are narrow and predictable. They are covered below. This guide exists so that the next time somebody in your group starts to tell you something that sounds wrong, you have a better script than whatever instinct is going to produce in the moment.</p>
+</section>
+
+<section id="what-it-is">
+<h2>What psychological abuse and coercive control actually are</h2>
+
+<p>Domestic violence is not just hitting. The legal definition in Colorado and the clinical definition in the research both recognize a pattern of behavior designed to control another person — through intimidation, isolation, financial control, surveillance, threats, humiliation, and the systematic degradation of the other person's autonomy and sense of reality. Physical violence may be part of it. It doesn't have to be.</p>
+
+<p>The technical term is <strong>coercive control</strong>. The older term is <strong>psychological abuse</strong>. They describe the same thing. In the research, psychological abuse without physical violence produces mental-health harm equivalent to or greater than physical violence. This is counterintuitive and important: <em>the absence of bruises does not mean the situation is mild.</em> Some of the most dangerous abusers never hit.</p>
+</section>
+
+<section id="warning">
+<h2>Warning signs, in three registers</h2>
+
+<h3>What you might see in the room</h3>
+
+<p>When you're with a couple together, or when one of them is describing the other:</p>
+
+<ul>
+  <li><strong>One partner speaks for both.</strong> Answers questions directed at the other. Corrects their account. "What she means is…"</li>
+  <li><strong>One partner monitors the other's face.</strong> Checks their reaction before answering. Apologizes and revises when the other shifts posture.</li>
+  <li><strong>Asymmetric presentation.</strong> One is warm, articulate, self-deprecating, charming. The other is shut down, vague, flat, or over-apologetic. The difference is larger than personality would explain.</li>
+  <li><strong>"We both need to work on things"</strong> from one partner while the other absorbs all blame. Listen for who claims fault and who accepts it.</li>
+  <li><strong>Pathologizing the partner.</strong> "She's having a mental health crisis." "He's on the spectrum, he doesn't mean things the way they sound." "She's being influenced by people outside the marriage." The partner is being reframed as defective or compromised rather than disagreeing.</li>
+  <li><strong>Stories that don't add up.</strong> Events the calmer partner describes don't match things you've observed, or shift each time they're retold.</li>
+</ul>
+
+<h3>What to ask about, if you're meeting with one person alone</h3>
+
+<p>Not as an interrogation. As part of ordinary caring conversation, when relevant:</p>
+
+<ul>
+  <li><strong>Money.</strong> Does your partner control the money? Do you have to ask permission or account for spending? Do you have your own bank account?</li>
+  <li><strong>Isolation.</strong> Have you stopped seeing friends or family over the last few years? Is that a choice that feels like yours?</li>
+  <li><strong>Surveillance.</strong> Does your partner check your phone, messages, location, or social media?</li>
+  <li><strong>Fear.</strong> Do you find yourself being careful about what you say or do to avoid their reaction? Do you feel afraid of them, even sometimes?</li>
+  <li><strong>Threats.</strong> Has your partner ever threatened to take the kids, leave you destitute, harm themselves, or expose something about you?</li>
+  <li><strong>Children and pets.</strong> Has your partner hurt or threatened your children or pets? Do they use the kids against you?</li>
+  <li><strong>The eggshells test.</strong> Do you manage your behavior to avoid their anger? Is there a long list of things you don't do because of how they'd react?</li>
+</ul>
+
+<p>A single "yes" to any of these is worth paying attention to. Multiple "yes" answers, or a "yes" to fear, is a clear indicator of coercive control.</p>
+
+<h3>Red flags that lift this out of "marriage conflict" entirely</h3>
+
+<ul>
+  <li><strong>Any history of physical violence, including "just once."</strong> Grabbing, blocking a door, throwing things, restraining, shoving — all count, even if nobody was injured.</li>
+  <li><strong>Any sexual coercion.</strong> Marriage does not make consent automatic. Pressured sex is sexual abuse.</li>
+  <li><strong>Threats to kill,</strong> including "I'd rather be dead than lose you," "I'd rather we were both dead," or "nobody else will ever have you." These are not romantic. They are statistically significant lethality indicators in the research.</li>
+  <li><strong>Weapons in the home,</strong> especially when combined with any of the above.</li>
+  <li><strong>Escalation</strong> in frequency or severity of incidents over recent weeks or months.</li>
+  <li><strong>Strangulation or choking, ever, even once.</strong> Non-fatal strangulation is one of the strongest predictors of future homicide in the research. Take it seriously and get professional help involved immediately.</li>
+  <li><strong>Framing the partner as spiritually compromised, possessed, or needing to be "fixed" or "cast out."</strong> When a partner starts describing the other in cosmological terms — demonic influence, spiritual darkness, needing deliverance — this is a serious warning sign independent of any threat of violence. The research calls it <em>ideational reclassification</em>. The language of necessary correction often precedes behavior the person would not otherwise permit themselves.</li>
+</ul>
+
+<div class="callout critical">
+  <div class="title">If you see the last one specifically</div>
+  <p style="margin: 0;">Don't wait. That person should be talking to a trained domestic violence advocate in the near term, not the distant future.</p>
+</div>
+</section>
+
+<section id="mistakes">
+<h2>Seven things well-meaning helpers do that make it worse</h2>
+
+<p>These are not theoretical. They are the things lay helpers and undertrained pastors do every day in churches, with love in their hearts, that cause measurable harm. Survivors report them consistently in qualitative research.</p>
+
+<h3>1. Suggesting couples counseling</h3>
+
+<p>Couples counseling with an active abuser is contraindicated. Every major DV organization and every evidence-based training curriculum agrees on this. It assumes both partners can speak freely and share responsibility, neither of which is true in coercive control. Anything the victim discloses in session becomes material the abuser will use later. The abuser learns the victim's language and uses it to manipulate more effectively. <em>Counseling with the abuser present is not a neutral failure; it actively arms them.</em></p>
+
+<p><strong>What to do instead:</strong> Separate individual support. The victim needs a DV-informed counselor or advocate. The abuser needs a batterer intervention program — not anger management, not marriage counseling, not a men's ministry. Batterer intervention programs are specifically designed for this and they are not the same thing as other programs that sound similar.</p>
+
+<h3>2. Pushing reconciliation or forgiveness prematurely</h3>
+
+<p>Victims are often told to forgive, to restore the marriage, to "move forward." Forgiveness in the biblical sense is a real and good thing; rushing it in the context of ongoing abuse is not forgiveness, it's pressure on the victim to absorb more harm. Reconciliation requires sustained, demonstrated change in the abuser — not an apology, not tears, not a promise, not a season of better behavior. Years of change verified by professionals. Anything less puts the victim back in danger.</p>
+
+<p><strong>What to do instead:</strong> Forgiveness is between the person and God, on their timeline. Reconciliation is conditional on change that hasn't happened yet. You do not need to push either one. The goal right now is safety.</p>
+
+<h3>3. Misapplying submission or headship</h3>
+
+<p>Telling a wife she needs to submit more, be gentler, pray harder, or that "God hates divorce" gives theological cover to abuse. It is exactly what the abuser wants said. Even in churches that hold to headship theology, there is no reading of Ephesians 5 that asks wives to submit to sin against them. The Southern Baptist Convention — not a theologically progressive body — explicitly resolved that "biblical headship blesses, honors, and protects wives and children and does not require them to submit to sin or to abuse." If that denomination can say it, you can say it.</p>
+
+<p><strong>What to do instead:</strong> Be explicit. "What is happening to you is not God's plan for your marriage. You are not failing as a wife / husband. Your safety comes first." You don't need to win a theological argument. You need to remove the theological weight the abuser is putting on the victim's shoulders.</p>
+
+<h3>4. Blaming the victim, even gently</h3>
+
+<p>"What part did you play in this?" "Have you examined your own heart?" "Sometimes we provoke responses we don't intend." All of this, however kindly meant, shifts moral labor onto the person being harmed. Abuse is not a communication problem the victim contributed to. It is a choice the abuser made. Imperfection in the victim does not cause or justify the pattern.</p>
+
+<p><strong>What to do instead:</strong> "This is not your fault. What is being done to you is wrong, period." Say it out loud. Victims typically minimize, not exaggerate; they have been told for years that the problem is them. Your job is to not be one more voice confirming that message.</p>
+
+<h3>5. Breaking confidentiality to the abuser</h3>
+
+<p>Telling the abuser — or anyone who might tell the abuser — what the victim disclosed is dangerous. Not awkward, not unwise, <em>dangerous</em>. The victim's disclosure is a moment of trust that has material safety consequences. An abuser finding out their partner "told on them" to a church friend is a documented trigger for escalation. This includes telling the abuser's family, telling mutual friends, telling the small group, telling the pastor if the victim asked you not to, and telling your own spouse if there's any risk of it getting back.</p>
+
+<p><strong>What to do instead:</strong> What they share, stays. The only exceptions are: (a) mandatory reporting if children are being abused (know your state's law), (b) if they give you explicit permission to loop someone in, or (c) if they are in imminent danger and you need to call 911. That's it.</p>
+
+<h3>6. Believing the abuser's repentance at face value</h3>
+
+<p>Abusers are often charming, articulate, and remorseful-seeming. They can cry. They can quote Scripture. They can appear genuinely broken. Research on perpetrator desistance — actual sustained change — is clear that it looks nothing like the week-long repentance cycle most abusers produce on demand. Real change involves identity-level shifts, specific (not diffuse) guilt, engagement with violence-focused intervention over years, sustained behavior change when nobody is watching, and willingness to restructure the relationships that enabled the pattern. An emotional apology in your living room is not evidence of any of those things.</p>
+
+<p><strong>What to do instead:</strong> Believe performance is performance until there is sustained, verifiable evidence otherwise. Ask: has this person engaged with a batterer intervention program, and for how long? Is the victim reporting sustained behavior change, not just a calm period? If you can't answer those questions with years of evidence, the repentance is not yet what it looks like.</p>
+
+<h3>7. Trying to handle it yourself</h3>
+
+<p>You are not trained for this, and the stakes are too high to learn on the job. Pastors with seminary training and years of experience routinely get this wrong; lay helpers in small groups and home churches have even less to work with. The people in your church who are competent to help long-term are almost certainly not in your church.</p>
+
+<p><strong>What to do instead:</strong> Your job is a hand-off, not a solution. Listen. Believe. Keep confidentiality. Help the person connect to a domestic violence professional — a local advocate, the National Hotline, a DV-informed therapist, a legal-aid organization. Stay present as ongoing support. Let the actual work happen with people who know how to do it.</p>
+</section>
+
+<section id="disclosure">
+<h2>What to do when someone discloses</h2>
+
+<p>When it's happening in front of you — in a small group, on a walk, in the kitchen after dinner — keep these in this order:</p>
+
+<ul>
+  <li><strong>Believe them.</strong> Say it out loud. "I hear you. I believe you." Victims typically minimize. If what they're describing sounds concerning, it is probably worse than the version they are giving you.</li>
+  <li><strong>Say it's not their fault.</strong> Explicitly. "This is not your fault. What is being done to you is wrong."</li>
+  <li><strong>Don't ask "why don't you just leave."</strong> Leaving is the most dangerous moment statistically; asking that question is both painful and shows you don't know the landscape. Instead: "What do you need right now?"</li>
+  <li><strong>Ask about immediate safety.</strong> "Are you safe tonight? Are your children safe? Is there somewhere you can go if you need to?"</li>
+  <li><strong>Don't confront the abuser.</strong> Ever. It puts the victim in danger. This feels satisfying and noble. Don't do it.</li>
+  <li><strong>Offer the handoff.</strong> "There are people who do this for a living. Would it help if I gave you the number for the domestic violence hotline?" Offer; don't push.</li>
+  <li><strong>Keep what they shared confidential.</strong> Even from your spouse if the situation is complicated. Even from the pastor if they asked you not to.</li>
+  <li><strong>Stay in their life.</strong> Don't disappear after the disclosure. Don't make the conversation the whole relationship, either. Be a friend who also happens to know.</li>
+  <li><strong>Document what was shared, privately.</strong> Date, approximate content, in a place the abuser can't access. Not to use against anyone — to corroborate the timeline later if it becomes relevant.</li>
+</ul>
+</section>
+
+<section id="urgent">
+<h2>When to get professional help involved — urgently</h2>
+
+<p>Call or strongly encourage them to call, today or this week, if any of these are present:</p>
+
+<ul>
+  <li>Threats to kill — the victim, the abuser, the kids, anyone.</li>
+  <li>Non-fatal strangulation / choking, ever.</li>
+  <li>Access to firearms combined with escalation.</li>
+  <li>Sudden escalation in frequency or severity in recent weeks.</li>
+  <li>The abuser has begun framing the victim in moral, spiritual, or pathologizing terms ("she's mentally unwell," "she needs deliverance").</li>
+  <li>The victim says they are afraid of what the abuser might do.</li>
+  <li>Sexual coercion or assault.</li>
+  <li>Pregnancy in the relationship — pregnancy is a documented elevated-risk period.</li>
+  <li>Recent separation or stated intent to leave — the weeks around separation are statistically the most dangerous.</li>
+</ul>
+
+<p>"Urgently" does not mean dramatically. It means: the person should be talking to a trained DV advocate <em>soon</em>, not someday. The advocate can do risk assessment, safety planning, and connect them to resources you can't.</p>
+</section>
+
+<section id="resources">
+<h2>Resources to hand off</h2>
+
+<h3>Immediate / crisis</h3>
+
+<p><strong>National Domestic Violence Hotline:</strong> 1-800-799-7233 (1-800-799-SAFE). Text START to 88788. 24/7, confidential, free. Trained advocates do risk assessment, safety planning, and connection to local resources.</p>
+
+<p><strong>911</strong> for immediate physical danger.</p>
+
+<h3>Northern Colorado</h3>
+
+<p>The advocates at these organizations are trained specifically in coercive control and psychological abuse. They do not require physical violence, injuries, or a police report to provide help.</p>
+
+<h4>Weld County</h4>
+<p><strong>A Woman's Place</strong> (Greeley — Weld County's only DV shelter): 24-hour crisis line <strong>970-356-4226</strong>. Shelter, safety planning, legal advocacy, counseling, youth services, housing and employment support. Free. awpdv.org</p>
+
+<h4>Larimer County</h4>
+<p><strong>Crossroads Safehouse</strong> (Fort Collins): 24-hour crisis line <strong>970-482-3502</strong> or toll-free 888-541-7233. Shelter, on-site legal representation, crisis intervention, counseling, children's services, and CrossTrails pet-fostering program for survivors whose planning includes household animals. crossroadssafehouse.org</p>
+
+<p><strong>Alternatives to Violence</strong> (Loveland and southern Larimer County): 24-hour crisis line <strong>970-880-1000</strong> or main 970-669-5150. Shelter, crisis intervention, court advocacy, transitional housing, support groups. alternativestoviolence.org</p>
+
+<h4>Legal aid specifically</h4>
+<ul>
+  <li><strong>Bringing Justice Home</strong> (project of Crossroads Safehouse): no-cost bilingual legal representation for low-income DV survivors in protection orders, divorce, custody. Serves Larimer, Weld, Routt, Grand, Moffat, and Jackson counties.</li>
+  <li><strong>Colorado Legal Services</strong> (970-493-2891 ext. 261): civil legal services for low-income survivors; prioritizes DV cases.</li>
+  <li><strong>Rocky Mountain Victim Law Center:</strong> statewide no-cost legal services for crime victims, including DV survivors. rmvictimlaw.org</li>
+</ul>
+
+<h4>Statewide resource directories</h4>
+<ul>
+  <li><strong>Violence Free Colorado</strong> (state DV coalition): county-by-county listing of advocacy programs. violencefreecolorado.org</li>
+  <li><strong>Colorado Judicial Branch legal help:</strong> lawhelp.colorado.gov</li>
+  <li><strong>2-1-1 / 866-760-6489:</strong> statewide multilingual resource connection.</li>
+</ul>
+</section>
+
+<section id="specific">
+<h2>A few things worth knowing about specific situations</h2>
+
+<h3>When the victim is neurodivergent</h3>
+
+<p>Autistic and ADHD adults are at substantially elevated risk of intimate partner abuse, for reasons that include lifelong masking, a history of being told their perceptions are wrong, smaller social networks that make isolation easier, and the abuser's ability to pathologize neurodivergent traits as proof the victim is "difficult" or "unwell." Distress in neurodivergent victims may not look like what you expect — it may present as flat affect, over-accommodation, apparent compliance, or shutdown rather than visible fear. <em>Do not read "calm" as "fine."</em></p>
+
+<p>A partner who frames their spouse as "mentally ill" or "having meltdowns" or "on the spectrum, she doesn't understand" may be describing a real diagnosis; they may also be using that framing as a tool of control. Both things can be true at once, and the second does not excuse the first.</p>
+
+<h3>When the family involves immigrants or first-generation community members</h3>
+
+<p>In many immigrant community contexts — including significant portions of the Latino and African-origin communities in Northern Colorado — the abuser's family of origin may be directly involved in the pattern. Colorado law and international DV research both recognize "in-law abuse" as a distinct category of domestic violence. A mother-in-law who screams at the wife, a father-in-law who instructs his son to discipline his wife, extended family who discredit the victim to the rest of the community — these are not "cultural differences" that should be tolerated or worked around. They are infrastructure of abuse in the coercive-control framework.</p>
+
+<p>Additionally, language barriers, immigration status concerns (including fear that leaving will affect a visa or residency), and community pressure to protect the family's reputation all compound the victim's entrapment. Advocates at the organizations above can work in Spanish and through interpreter services, and DV shelter services are available regardless of immigration status.</p>
+
+<p>If the person disclosing is worried about their immigration status, the Rocky Mountain Immigrant Advocacy Network (RMIAN) and Colorado Legal Services can provide specific guidance. <strong>Never, under any circumstances, threaten or imply that leaving could result in deportation</strong> — that is itself an abuse tactic and has happened in church contexts with devastating results.</p>
+
+<h3>When children are involved</h3>
+
+<p>In Colorado, clergy and many church workers are mandatory reporters of child abuse. Witnessing domestic violence is itself recognized as a form of harm to children in the research — the mental-health impact on children who witness psychological abuse matches that of children who are physically abused themselves. The phrase "but the kids love their dad" does not mean the kids are unaffected.</p>
+
+<p>If children are being directly harmed, or if their safety is at imminent risk, the mandatory reporting obligation applies. Know your state's law. If you are a volunteer and unsure whether you are a mandatory reporter, err on the side of calling — you can consult the DV hotline or a DV advocate anonymously to think it through before making any formal report.</p>
+
+<h3>When the abuser is a leader or respected member of your church</h3>
+
+<p>This is the case where church communities most reliably fail victims. The abuser is often deeply embedded, well-liked, serving in ministry, generous with their time, praying publicly in gifted ways. The victim discloses and the community cannot reconcile the disclosure with the person they know — so they reflexively protect the person they know. <em>This is exactly the mechanism that lets abuse persist in church communities for decades.</em></p>
+
+<p>The research is clear: abusers in churches are disproportionately in visible service and leadership. Their public persona is not evidence of their private behavior. Believing the victim when the accused is someone you respect is harder, and it is the thing the situation requires. If the accused is in a counseling, mentoring, or leadership role where they have access to others, that needs to be paused — quietly, pending actual evaluation, not as punishment — because others are at risk.</p>
+</section>
+
+<section id="summary">
+<h2>What not to do, in one place</h2>
+
+<div class="callout critical">
+  <div class="title">The do-not list</div>
+  <ul style="margin: 0; padding-left: 20px;">
+    <li>Don't do couples counseling. Don't mediate. Don't facilitate reconciliation.</li>
+    <li>Don't confront the abuser.</li>
+    <li>Don't tell anyone who might tell the abuser.</li>
+    <li>Don't push forgiveness or reconciliation on the victim's timeline.</li>
+    <li>Don't quote "God hates divorce."</li>
+    <li>Don't ask the victim what their role in the problem is.</li>
+    <li>Don't ask "why don't you just leave."</li>
+    <li>Don't take the abuser's tears as evidence of change.</li>
+    <li>Don't try to solve it yourself.</li>
+    <li>Don't disappear after the disclosure.</li>
+    <li>Don't make the abuse the entire relationship.</li>
+  </ul>
+</div>
+
+<h3>If your group wants to go further</h3>
+
+<p><strong>Free, comprehensive, and widely endorsed:</strong> churchcares.com offers a free 12-lesson video curriculum, "Becoming a Church That Cares Well for the Abused," developed by evangelical trauma counselors, attorneys, DV advocates, and batterer-intervention specialists. It is the single best starting point for a small-group leader team or elder advisory council to work through together over a few weeks. Handbook and videos are free.</p>
+
+<p><strong>One book, if you read only one:</strong> <em>Why Does He Do That?</em> by Lundy Bancroft. Thirty years of working with abusive men in intervention programs; explains the mindset and tactics in language that's accessible without being dumbed down. Not written from a Christian framework but compatible with one.</p>
+
+<p><strong>One book, if you want the Christian register:</strong> <em>The Emotionally Destructive Marriage</em> by Leslie Vernick. Written by a Christian licensed counselor; distinguishes "difficult" marriages from "destructive" ones in a way that lay counselors find useful.</p>
+
+<p><strong>For training specifically on coercive control recognition:</strong> The MEND Project (themendproject.com) runs responder training specifically on the patterns this document describes. Called to Peace Ministries (calledtopeace.org) provides pastor and lay-leader training from a Christian perspective.</p>
+
+<h3>One last thing</h3>
+
+<p>You are not going to handle every case perfectly. You will get things wrong. The point is not to become an expert — you won't, and trying to will hurt people. The point is to know enough to not do the specific things that extend abuse, to believe people when they tell you what's happening, to keep what they share safe, and to hand them off to people who can actually help. Those four things, consistently, make lay helpers in participatory churches a meaningful protective factor in the lives of abuse survivors rather than one more voice telling them the problem is them.</p>
+
+<p>Most people in your church are not in abusive relationships. A smaller number are. The ones who are will tell someone eventually, if they tell anyone. That someone is often you. Knowing what to do in that conversation is worth the hour it took to read this.</p>
+</section>
+
+<section id="cards">
+<h2>Printable reference cards</h2>
+
+<p>A printable seven-card set is available as a separate PDF, designed to be cut along borders and kept in a Bible, wallet, or phone case. The cards cover:</p>
+
+<ul>
+  <li>Warning signs (what coercive control looks like)</li>
+  <li>Red flags (this is not a communication problem)</li>
+  <li>Neurodivergent victims (distress that doesn't look like distress)</li>
+  <li>What NOT to do (well-meaning actions that extend abuse)</li>
+  <li>What TO do (when someone discloses)</li>
+  <li>Who to call (Northern Colorado resources)</li>
+  <li>Immigrant families (additional context that matters)</li>
+</ul>
+
+<a class="card-link" href="http://milvusrae.github.io/ipv_support_resources/Friend_Quick_Reference_Cards.pdf">
+  <div class="label">↓ Download PDF</div>
+  <div class="title">Friend &amp; Lay-Counselor Reference Cards</div>
+  <div class="desc">Three pages, seven cards. Cut along borders. Share with other leaders in your ministry.</div>
+</a>
+</section>
+
+</main>
+
+<footer>
+<p style="margin: 0;">Compiled April 2026. Draws on clinical and research literature on coercive control and intimate partner violence (Stark, Johnson, Bancroft, Campbell, Langberg, Vernick, Kitzmann, Lohmann, Ehrensaft, and others), Colorado statutory framework, and materials from ChurchCares, Called to Peace, The MEND Project, FaithTrust Institute, and Northern Colorado DV service organizations. Free to copy, distribute, and adapt for church and ministry use.</p>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
