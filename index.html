@@ -163,6 +163,146 @@
     margin: 0;
   }
 
+  .law-section {
+    padding: 28px 0 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .law-section h2 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 0 0 8px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .law-section .group-desc {
+    font-size: 14.5px;
+    color: var(--text-soft);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0 0 14px;
+  }
+  details.law {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  details.law[open] {
+    border-color: var(--navy-light);
+  }
+  details.law > summary {
+    padding: 18px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    position: relative;
+    color: var(--text);
+  }
+  details.law > summary::-webkit-details-marker { display: none; }
+  details.law > summary::after {
+    content: '+';
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--navy);
+    transition: transform 0.15s;
+  }
+  details.law[open] > summary::after {
+    content: '−';
+  }
+  details.law > summary:hover {
+    background: var(--bg-soft);
+  }
+  details.law .law-label {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warm-accent);
+    margin-bottom: 4px;
+  }
+  details.law .law-title {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    padding-right: 32px;
+  }
+  details.law .law-desc {
+    font-size: 14.5px;
+    color: var(--text-soft);
+    line-height: 1.5;
+    margin: 0;
+    padding-right: 32px;
+  }
+  details.law .law-body {
+    padding: 4px 20px 18px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+    background: var(--bg-soft);
+  }
+  details.law .law-body h3 {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 18px 0 8px;
+    font-weight: 700;
+  }
+  details.law .law-body h3:first-child { margin-top: 14px; }
+  details.law .law-body p {
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 10px;
+    color: var(--text);
+    font-family: ui-serif, Georgia, serif;
+  }
+  details.law .law-body blockquote {
+    margin: 10px 0;
+    padding: 10px 16px;
+    background: white;
+    border-left: 3px solid var(--navy);
+    border-radius: 0 4px 4px 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--text);
+    font-style: italic;
+    font-family: ui-serif, Georgia, serif;
+  }
+  details.law .law-body ul {
+    padding-left: 22px;
+    margin: 0 0 12px;
+  }
+  details.law .law-body li {
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 6px;
+    font-family: ui-serif, Georgia, serif;
+  }
+  details.law .law-body .source-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12.5px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  details.law .law-body .source-link:hover {
+    color: var(--navy-light);
+  }
+
   footer {
     padding: 24px 20px 40px;
     text-align: center;
@@ -241,6 +381,78 @@
   <div class="title">When Marriage Becomes Captivity</div>
   <div class="desc">A practical and scriptural guide for pastors, elders, and lay helpers. Recognizing coercive control, neurodivergent and immigrant-family dynamics, what scripture actually says about abuse and marriage, common pastoral mistakes, and practical protocols. Includes printable reference card.</div>
 </a>
+</div>
+
+<div class="law-section">
+<h2>What Colorado law actually says</h2>
+<p class="group-desc">Coercive control is not just a clinical or research concept. As of 2024, it is part of how Colorado defines domestic violence in family court — meaning the patterns described in these documents are recognized by name in state law.</p>
+
+<details class="law">
+  <summary>
+    <div class="law-label">Colorado HB24-1350 · effective Aug 7, 2024</div>
+    <div class="law-title">Coercive control is now defined in Colorado statute</div>
+    <div class="law-desc">Colorado's "Kayden's Law" defines coercive control and requires family courts to consider it when making decisions about children's safety in custody and parenting time.</div>
+  </summary>
+  <div class="law-body">
+    <h3>The statutory definition</h3>
+    <p>Colorado HB24-1350, signed into law by Governor Polis on June 3, 2024 and effective August 7, 2024, amended the parental responsibilities statute (C.R.S. § 14-10-124) to define coercive control as:</p>
+    <blockquote>"a pattern of threatening, humiliating, or intimidating actions, including assaults or other abuse, that is used to harm, punish, or frighten an individual."</blockquote>
+    <p>The definition is deliberately broad. It does not require physical violence. It does not require a single dramatic incident. It captures the pattern of behavior that survivors and researchers have long described — and that this collection of resources walks through in detail.</p>
+
+    <h3>What the law requires of family courts</h3>
+    <p>HB24-1350 makes several substantial changes to how Colorado family courts handle cases involving abuse:</p>
+    <ul>
+      <li>Child and family investigators (CFIs) and parental responsibilities evaluators (PREs) must include all information about domestic violence, child abuse, and coercive control in their written reports — they cannot leave it out.</li>
+      <li>If a court orders unsupervised parenting time when there is any allegation of domestic violence, child abuse, or coercive control, the court must state in writing or on the record why unsupervised parenting time is in the child's best interest.</li>
+      <li>Courts must give "strong consideration" to a child's preference about parenting time when allegations of abuse have been made and the child's preference is consistent with their safety.</li>
+      <li>Investigators and evaluators must complete additional training on domestic violence and child abuse before serving in cases.</li>
+    </ul>
+    <p>The law represents a significant shift in Colorado family court practice. Coercive control — the pattern of behavior that does not always produce police reports, criminal charges, or visible injuries — is now something the court is expected to recognize and weigh.</p>
+    <a class="source-link" href="https://leg.colorado.gov/bills/HB24-1350" target="_blank" rel="noopener">Read the bill at leg.colorado.gov →</a>
+  </div>
+</details>
+
+<details class="law">
+  <summary>
+    <div class="law-label">Colorado HB23-1178 · effective May 25, 2023</div>
+    <div class="law-title">Court personnel must be trained to recognize abuse</div>
+    <div class="law-desc">Colorado's earlier reform requires family court personnel to undergo domestic violence and child abuse training, and constrains certain court practices that have historically harmed survivors and protective parents.</div>
+  </summary>
+  <div class="law-body">
+    <h3>What the law requires</h3>
+    <p>HB23-1178, signed into law by Governor Polis on May 25, 2023, brings Colorado into compliance with the federal "Keeping Children Safe From Family Violence Act" (Kayden's Law at the federal level). Among its provisions:</p>
+    <ul>
+      <li>Courts must consider expert testimony from professionals with demonstrated expertise working with victims of domestic violence or child abuse.</li>
+      <li>Courts must consider evidence of past abuse — including restraining orders, arrests, convictions, medical records, and other documentation — when making parenting decisions.</li>
+      <li>Child and family investigators, parental responsibilities evaluators, and child legal representatives must complete initial and ongoing training on domestic violence and child abuse, conducted by trainers with experience assisting survivors.</li>
+    </ul>
+
+    <h3>Limits on certain court practices</h3>
+    <p>The law constrains practices that have, in past Colorado cases, produced outcomes that put children in greater danger:</p>
+    <ul>
+      <li>A court cannot remove a child from — or restrict contact between a child and — a protective parent who is competent, protective, not abusive, and bonded with the child, solely to improve a deficient relationship with the accused parent.</li>
+      <li>A court cannot order "reunification therapy" that is predicated on cutting off the relationship between the child and the protective parent. Any reunification treatment ordered by the court must be generally accepted, with scientifically valid proof of safety, effectiveness, and therapeutic value.</li>
+    </ul>
+    <p>These provisions matter because reunification therapy that severs the protected child-parent bond — sometimes for weeks at a time, with no contact with the protective parent — has been a documented mechanism by which family courts have placed children with abusive parents over the objection of the parent who has been protecting them.</p>
+    <a class="source-link" href="https://leg.colorado.gov/bills/HB23-1178" target="_blank" rel="noopener">Read the bill at leg.colorado.gov →</a>
+  </div>
+</details>
+
+<details class="law">
+  <summary>
+    <div class="law-label">Why this matters for survivors</div>
+    <div class="law-title">The legal framework now recognizes the pattern</div>
+    <div class="law-desc">For survivors, family members, advocates, and faith communities — Colorado law now formally recognizes what these documents describe.</div>
+  </summary>
+  <div class="law-body">
+    <p>Two practical implications worth knowing:</p>
+    <ul>
+      <li><strong>"There were no police reports" is no longer a complete answer.</strong> Coercive control as defined in HB24-1350 does not require criminal charges, arrests, or police involvement. The pattern itself is what the statute recognizes. Survivors who have been told their experience "doesn't count" because there is no criminal record have, since August 2024, statutory grounds to push back on that framing in family court.</li>
+      <li><strong>Family court personnel are required to be trained.</strong> If a CFI, PRE, or judge appears unfamiliar with coercive control as a legal concept, that is now a training-compliance issue, not just an unfortunate gap. The legal framework exists; whether individual court personnel have caught up to it is a separate question, and one that survivors and their attorneys can raise.</li>
+    </ul>
+    <p>None of this guarantees that any individual case will be handled well. The gap between what the statute requires and what happens in any given courtroom is real, and survivors still need attorneys who know the framework cold. But the framework exists, and it has not always existed. Colorado is among the states leading on this; HB24-1350 is one of the more progressive coercive-control statutes in the country.</p>
+  </div>
+</details>
 </div>
 
 </main>
